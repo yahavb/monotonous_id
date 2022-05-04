@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: monotonous-ingres
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    #alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    #alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:212076617619:certificate/5c6e4a60-b071-4295-8ccc-7500dfb7a486
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /mono
+            pathType: Prefix
+            backend:
+              service:
+                name: monotonous-svc
+                port: 
+                  number: 80

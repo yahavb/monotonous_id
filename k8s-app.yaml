@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monotonous-app
+  namespace: default
+  labels:
+    app: monotonous-app
+spec:
+  selector:
+    matchLabels:
+      app: monotonous-app
+  template:
+    metadata:
+      labels:
+        app: monotonous-app
+    spec:
+      containers:
+        - name: app
+          image: 212076617619.dkr.ecr.us-west-2.amazonaws.com/monotonous_id:0.1
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 512m
+              memory: 512Mi
+          ports:
+            - containerPort: 8000
+      #terminationGracePeriodSeconds: 120
